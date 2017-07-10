@@ -458,6 +458,7 @@ events.push(function() {
 
 			case "dnsimple":
 			case "route53":
+			case "route53-v6":
 				hideGroupInput('domainname', true);
 				hideInput('resultmatch', true);
 				hideInput('updateurl', true);

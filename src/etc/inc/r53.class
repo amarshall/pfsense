@@ -82,14 +82,14 @@ class Route53
 	* @param string $ttl TTL for the record
 	* @return string XML document
 	*/
-	public function getRequestBody($fqdn, $ip, $ttl){
+	public function getRequestBody($fqdn, $ip, $recordType, $ttl){
 		$xmlreq = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		$xmlreq .= "<ChangeResourceRecordSetsRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">";
 		$xmlreq .= "<ChangeBatch><Changes><Change>";
 		$xmlreq .= "<Action>UPSERT</Action>";
 		$xmlreq .= "<ResourceRecordSet>";
 		$xmlreq .= sprintf("<Name>%s</Name>", $fqdn);
-		$xmlreq .= "<Type>A</Type>";
+		$xmlreq .= sprintf("<Type>%s</Type>", $recordType);
 		$xmlreq .= sprintf("<TTL>%d</TTL>", $ttl);
 		$xmlreq .= sprintf("<ResourceRecords><ResourceRecord><Value>%s</Value></ResourceRecord></ResourceRecords>",	$ip);
 		$xmlreq .= "</ResourceRecordSet>";
